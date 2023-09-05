@@ -10,20 +10,40 @@ RUN apt-get update \
 # && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get install -y libssl1.0.0 libicu52 libcurl3 libmysqlclient18 \
-    bash-completion python libpython2.7 \
-    libboost-filesystem1.55.0
+    bash-completion locales python libpython2.7 libxml2 \
+    libboost-filesystem1.55.0 \
+    php5 php5-common php5-cli
 
 COPY /src/deb-archive/ /tmp/deb-archive/
 
 RUN cd /tmp \
  && tar -xzf ./deb-archive/zcp*.tar.gz \
  && cd zcp-7.2.5.109-debian-8.0-x86_64-supported \
- && rm zarafa-dbg* zarafa-dev* libgsoap-zarafa-dbg* libical-zarafa-dbg* libvmime-zarafa7-dev* zcp-nonoss-dbg* \
+ && rm zarafa-dbg* zarafa-dev* libical-zarafa-dev* libgsoap-zarafa-dbg* \
+    libical-zarafa-dbg* libvmime-zarafa7-dev* zcp-nonoss-dbg* pacemaker-zarafa* \
  && dpkg --install ./libzcp-common-util0*.deb \
  && rm ./libzcp-common-util0*.deb \
- && dpkg --install zarafa-bash-completion*.deb
+ && dpkg --install ./zarafa-bash-completion*.deb \
+ && dpkg --install ./zarafa-lang*.deb \
+ && rm ./zarafa-lang*.deb \
+ && dpkg --install ./libgsoap-zarafa-2*.deb ./libical-zarafa1*.deb \
+ && rm ./libgsoap-zarafa-2*.deb ./libical-zarafa1*.deb \
+ && dpkg --install ./libzcp-common-service0*.deb ./libzcp-common-ssl0*.deb ./libzcp-pydirector0*.deb \
+ && rm ./libzcp-common-service0*.deb ./libzcp-common-ssl0*.deb ./libzcp-pydirector0*.deb \
+ && dpkg --install ./libzarafa-soapclient0*.deb ./libzarafa-soapserver0*.deb \
+ && rm ./libzarafa-soapclient0*.deb ./libzarafa-soapserver0*.deb \
+ && dpkg --install ./libmapi1*.deb ./libzcp-common-mapi0*.deb ./zarafa-client*.deb \
+    ./libzarafasync0*.deb ./libfreebusy0*.deb \
+ && rm ./libmapi1*.deb ./libzcp-common-mapi0*.deb ./zarafa-client*.deb \
+    ./libzarafasync0*.deb ./libfreebusy0*.deb \
+ && dpkg --install ./libicalmapi1*.deb ./libinetmapi1*.deb ./libvmime-zarafa7*.deb \
+ && rm ./libicalmapi1*.deb ./libinetmapi1*.deb ./libvmime-zarafa7*.deb \
+ && dpkg --install ./libzarafa-archiver-core0*.deb ./libzarafa-archiver0*.deb libzcp-pyconv0*.deb zarafa-contacts*.deb\
+ && rm ./libzarafa-archiver-core0*.deb ./libzarafa-archiver0*.deb libzcp-pyconv0*.deb zarafa-contacts*.deb \
+ && dpkg --install python-*.deb ./php5-mapi*.deb \
+ && rm python-*.deb ./php5-mapi*.deb
 
-RUN dpkg --install ./libzcp-common-util0*.deb
+# RUN dpkg --install ./libzcp-*.deb
 
 ENV SHELL=/bin/bash
 WORKDIR /root
