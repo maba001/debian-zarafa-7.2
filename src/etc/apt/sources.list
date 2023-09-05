@@ -1,5 +1,6 @@
-#
-# deb cdrom:[Debian GNU/Linux 7.5.0 _jessie_ - Official amd64 NETINST Binary-1 20140426-13:35]/ jessie main
+# ---------------------------
+# Debian GNU/Linux 8.x Jessie
+# ---------------------------
 
 deb http://archive.debian.org/debian-archive/debian/ jessie main
 # deb-src http://archive.debian.org/debian-archive/debian/ jessie main
