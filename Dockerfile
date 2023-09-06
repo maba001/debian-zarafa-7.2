@@ -4,25 +4,18 @@ COPY /src/etc/ /etc/
 
 RUN apt-get update \
  && apt-get upgrade -y \
- && apt-get install apt-utils -y \
- && apt-get clean
-# && apt-get clean \
-# && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get install -y libssl1.0.0 libicu52 libcurl3 libmysqlclient18 \
-    bash-completion locales mktemp gawk w3m xsltproc unzip poppler-utils catdoc \
-    python libpython2.7 python-xapian python-flask python-sleekxmpp libxml2 \
-    libboost-filesystem1.55.0 libtcmalloc-minimal4 \
-    php5 php5-common php5-cli
+ && apt-get install -y apt-utils \
+ && apt-get install -y bash-completion locales mktemp gawk w3m unzip poppler-utils catdoc \
+ && apt-get install -y libssl1.0.0 libicu52 libcurl3 libmysqlclient18 \
+ && apt-get install -y libxml2 xsltproc libboost-filesystem1.55.0 libtcmalloc-minimal4 \
+ && apt-get install -y python libpython2.7 python-xapian python-flask python-sleekxmpp  \
+ && apt-get install -y php5 php5-common php5-cli \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY /src/deb-archive/ /tmp/deb-archive/
 
-RUN cd /tmp \
- && tar -xzf ./deb-archive/zcp*.tar.gz \
- && cd zcp-7.2.5.109-debian-8.0-x86_64-supported \
- && rm zarafa-dbg* zarafa-dev* libical-zarafa-dev* libgsoap-zarafa-dbg* \
-    libical-zarafa-dbg* libvmime-zarafa7-dev* zcp-nonoss-dbg* pacemaker-zarafa* \
-    zarafa-backup_* zarafa-multiserver_* \
+RUN cd /tmp/deb-archive/ \
  && dpkg --install libzcp-common-util0*.deb \
  && rm libzcp-common-util0*.deb \
  && dpkg --install zarafa-lang*.deb \
@@ -46,8 +39,6 @@ RUN cd /tmp \
  && dpkg --install libzarafa-server0*.deb zarafa-common*.deb \
  && rm libzarafa-server0*.deb zarafa-common*.deb \
  && dpkg --install zarafa*.deb
-
-# RUN dpkg --install libzcp-*.deb
 
 ENV SHELL=/bin/bash
 WORKDIR /root
