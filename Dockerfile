@@ -42,3 +42,7 @@ RUN cd /tmp/deb-archive/ \
 
 ENV SHELL=/bin/bash
 WORKDIR /root
+
+COPY /src/usr/ /usr/
+
+CMD [ "/usr/local/bin/startup" ]

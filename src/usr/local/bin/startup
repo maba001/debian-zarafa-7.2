@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo Starting Zarafa server on port 236
+echo ==================================
