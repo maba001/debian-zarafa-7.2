@@ -45,4 +45,8 @@ WORKDIR /root
 
 COPY /src/usr/ /usr/
 
+# /etc/apache2/sites-available/000-default.conf:  #ServerName www.example.com
+RUN sed -i '/^#ServerRoot/a ServerName zarafa\.local' /etc/apache2/apache2.conf \
+ && sed -i 's/#\s*ServerName.*/ServerName zarafa\.local/' /etc/apache2/sites-available/000-default.conf
+
 CMD [ "/usr/local/bin/startup" ]
