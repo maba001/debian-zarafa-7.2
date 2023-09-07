@@ -5,4 +5,12 @@ echo ==================================
 
 /etc/init.d/apache2 start
 
+/etc/init.d/zarafa-server start
+/etc/init.d/zarafa-licensed start
+/etc/init.d/zarafa-spooler start
+/etc/init.d/zarafa-dagent start
+/etc/init.d/zarafa-gateway start
+/etc/init.d/zarafa-ical start
+/etc/init.d/zarafa-search start
+
 tail -f /var/log/apache2/access.log
