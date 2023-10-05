@@ -6,7 +6,6 @@ echo ==================================
 /etc/init.d/apache2 start
 
 sleep 2
-/etc/init.d/zarafa-spooler start
 /etc/init.d/zarafa-dagent start
 /etc/init.d/zarafa-gateway start
 /etc/init.d/zarafa-ical start
@@ -14,5 +13,6 @@ sleep 2
 sleep 2
 /etc/init.d/zarafa-licensed start
 /etc/init.d/zarafa-server start
+/etc/init.d/zarafa-spooler start
 
 tail -f /var/log/apache2/access.log

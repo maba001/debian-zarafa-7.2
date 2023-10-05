@@ -1,0 +1,31 @@
+services:
+
+  zarafa:
+    image: "zarafa-tmp"
+    hostname: zarafa
+    container_name: zarafa
+    ports:
+      - "8000:80"
+    depends_on:
+      - mariadb
+    volumes:
+      - /mnt/c/tmp/sbserver/etc/zarafa:/etc/zarafa
+      - /mnt/c/tmp/sbserver/var/log/zarafa:/var/log/zarafa
+    networks:
+      - zarafa-nw
+
+  mariadb:
+    image: "mariadb:10.3"
+    hostname: mariadb
+    container_name: mariadb
+    expose:
+      - "3306"
+    environment:
+      - MARIADB_ROOT_PASSWORD=localDevPw
+    volumes:
+      - /mnt/c/tmp/sbserver/mariadb-data:/var/lib/mysql
+    networks:
+      - zarafa-nw
+
+networks:
+  zarafa-nw:
