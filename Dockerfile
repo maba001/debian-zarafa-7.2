@@ -10,6 +10,7 @@ RUN apt-get update \
  && apt-get install -y libxml2 xsltproc libboost-filesystem1.55.0 libtcmalloc-minimal4 \
  && apt-get install -y python libpython2.7 python-xapian python-flask python-sleekxmpp  \
  && apt-get install -y php5 php5-common php5-cli \
+ && apt-get install -y perl perl-modules rename \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
