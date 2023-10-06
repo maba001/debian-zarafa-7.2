@@ -47,11 +47,14 @@ ENV SHELL=/bin/bash
 WORKDIR /root
 
 COPY /src/usr/ /usr/
+COPY /src/var/ /var/
 
 # /etc/apache2/sites-available/000-default.conf:  #ServerName www.example.com
 RUN sed -i '/^#ServerRoot/a ServerName zarafa\.local' /etc/apache2/apache2.conf \
- && sed -i 's/#\s*ServerName.*/ServerName zarafa\.local/' /etc/apache2/sites-available/000-default.conf \
- && cd /etc/apache2/sites-enabled \
- && ln -s ../sites-available/002-zarafa-webapp.conf .
+ && sed -i 's/#\s*ServerName.*/ServerName zarafa\.local/' /etc/apache2/sites-available/000-default.conf
+
+RUN chmod 644 /etc/apache2/sites-available/002*
+RUN a2enmod cgi expires headers proxy_http
+RUN a2ensite 002-zarafa-webapp
 
 CMD [ "/usr/local/bin/startup" ]
