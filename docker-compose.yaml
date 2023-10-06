@@ -6,13 +6,14 @@ services:
     container_name: zarafa
     ports:
       - "8000:80"
+      - "236:236"
     depends_on:
       - mariadb
     volumes:
       - /mnt/c/tmp/sbserver/etc/zarafa:/etc/zarafa
       - /mnt/c/tmp/sbserver/var/log/zarafa:/var/log/zarafa
     networks:
-      - zarafa-nw
+      - zarafa-net
 
   mariadb:
     image: "mariadb:10.3"
@@ -25,7 +26,7 @@ services:
     volumes:
       - /mnt/c/tmp/sbserver/mariadb-data:/var/lib/mysql
     networks:
-      - zarafa-nw
+      - zarafa-net
 
 networks:
-  zarafa-nw:
+  zarafa-net:
