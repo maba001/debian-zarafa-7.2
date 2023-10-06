@@ -5,7 +5,7 @@ COPY /src/etc/ /etc/
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y apt-utils \
- && apt-get install -y bash-completion locales mktemp gawk w3m unzip poppler-utils catdoc \
+ && apt-get install -y bash-completion locales mktemp gawk w3m tk wish unzip zip poppler-utils catdoc \
  && apt-get install -y libssl1.0.0 libicu52 libcurl3 libmysqlclient18 \
  && apt-get install -y libxml2 xsltproc libboost-filesystem1.55.0 libtcmalloc-minimal4 \
  && apt-get install -y python libpython2.7 python-xapian python-flask python-sleekxmpp  \
