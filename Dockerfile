@@ -47,6 +47,8 @@ COPY /src/usr/ /usr/
 
 # /etc/apache2/sites-available/000-default.conf:  #ServerName www.example.com
 RUN sed -i '/^#ServerRoot/a ServerName zarafa\.local' /etc/apache2/apache2.conf \
- && sed -i 's/#\s*ServerName.*/ServerName zarafa\.local/' /etc/apache2/sites-available/000-default.conf
+ && sed -i 's/#\s*ServerName.*/ServerName zarafa\.local/' /etc/apache2/sites-available/000-default.conf \
+ && cd /etc/apache2/sites-enabled \
+ && ln -s ../sites-available/002-zarafa-webapp.conf .
 
 CMD [ "/usr/local/bin/startup" ]
