@@ -5,14 +5,14 @@ echo ==================================
 
 /etc/init.d/apache2 start
 
-sleep 2
+/etc/init.d/zarafa-licensed start
+sleep 1
+/etc/init.d/zarafa-server start
+/etc/init.d/zarafa-spooler start
+sleep 1
 /etc/init.d/zarafa-dagent start
 /etc/init.d/zarafa-gateway start
 /etc/init.d/zarafa-ical start
 /etc/init.d/zarafa-search start
-sleep 2
-/etc/init.d/zarafa-licensed start
-/etc/init.d/zarafa-server start
-/etc/init.d/zarafa-spooler start
 
-tail -f /var/log/apache2/access.log
+tail -f /var/log/apache2/access.log -f /var/log/zarafa/licensed.log -f /var/log/zarafa/server.log
